@@ -10,20 +10,21 @@ These instructions will help you locally spin up the react front end and Flask b
 
 - Node.js and npm (https://nodejs.org/)
 - Python 3.x (https://www.python.org/downloads/)
+- Flask (pip install Flask)
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development environment running.
+- Follow these steps to set up the backend API, then the front end react UI. When you run each resource the commands should provide you the localhost link to see the pages, usually configured on ports 3000 and 5000 respectively
 
 #### Setting up the Backend (Flask)
 
 1. Clone the repository to your local machine:
 
-- git clone https://github.com/nickrinaldi88/nba-app.git
+- ```git clone https://github.com/nickrinaldi88/nba-app.git```
 
 2. Navigate to the Flask app directory:
 
-- cd api
+- ```cd api```
 
 3. Create a virtual environment:
 
@@ -52,14 +53,13 @@ A step by step series of examples that tell you how to get a development environ
 
 1. Navigate to the React app directory:
 
-- cd nba-app
+- ```cd nba-app```
 
 2. Install the required npm packages:
 
-- npm start
-
+- ```npm start```
 
 
 ## Contributing
 
-- email rinaldinick88@gmail.com if interested in partnering or contributing
+- email ```rinaldinick88@gmail.com``` if interested in partnering or contributing
