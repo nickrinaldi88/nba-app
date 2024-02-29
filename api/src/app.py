@@ -1,9 +1,11 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 # Assuming the NBA API Python package is named nba_api
 from nba_api.live.nba.endpoints import scoreboard
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/nba/games', methods=['GET'])
 

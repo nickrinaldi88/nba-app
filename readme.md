@@ -14,10 +14,13 @@ Baseline TODO:
 
 
 TODO:
--Display Game data in readable format, OR
+
 
 -Wire up Flask and React
     -Format in React objects on front end
 -Set up data store
 
 
+CONSIDERATIONS:
+- CORS configuration for production environment
+- How does React store state?
