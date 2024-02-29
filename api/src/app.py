@@ -15,8 +15,9 @@ def get_games():
     # List all attributes and methods
     formatted_games = []
     for game in game_data["scoreboard"]["games"]:
-        
+
         game_info = {
+            
             "homeTeam": game["homeTeam"]["teamName"],
             "homeTeamRecord": f'{game["homeTeam"]["wins"]}-{game["homeTeam"]["losses"]}',
             "homeTeamScore": game["homeTeam"]["score"],
@@ -24,29 +25,22 @@ def get_games():
             "awayTeamRecord": f'{game["awayTeam"]["wins"]}-{game["awayTeam"]["losses"]}',
             "awayTeamScore": game["awayTeam"]["score"],
             "gameTimeUTC": game["gameTimeUTC"],
-            "homeLeaders": {},
-            "awayLeaders": {},
+
+            "homeLeaders": {
+                "name": game["gameLeaders"]["homeLeaders"]["name"],
+                "points": game["gameLeaders"]["homeLeaders"]["points"],
+                "rebounds": game["gameLeaders"]["homeLeaders"]["rebounds"],
+                "assists": game["gameLeaders"]["homeLeaders"]["assists"],
+            },
+
+            "awayLeaders": {
+                "name": game["gameLeaders"]["awayLeaders"]["name"],
+                "points": game["gameLeaders"]["awayLeaders"]["points"],
+                "rebounds": game["gameLeaders"]["awayLeaders"]["rebounds"],
+                "assists": game["gameLeaders"]["awayLeaders"]["assists"],
+            },
         }
-        
-        # Assuming gameLeaders contains the desired leader information directly
-        if "homeLeaders" in game["gameLeaders"] and game["gameLeaders"]["homeLeaders"]:
-            home_leaders = game["gameLeaders"]["homeLeaders"]
-            game_info["homeLeaders"] = {
-                "points": home_leaders["points"],
-                "rebounds": home_leaders["rebounds"],
-                "assists": home_leaders["assists"],
-            }
-        
-        if "awayLeaders" in game["gameLeaders"] and game["gameLeaders"]["awayLeaders"]:
-            away_leaders = game["gameLeaders"]["awayLeaders"]
-            game_info["awayLeaders"] = {
-                "points": away_leaders["points"],
-                "rebounds": away_leaders["rebounds"],
-                "assists": away_leaders["assists"],
-            }
-        
         formatted_games.append(game_info)
-    
     return formatted_games
    
 

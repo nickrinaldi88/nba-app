@@ -1,0 +1,54 @@
+.game {
+    background-color: #FFF; /* White background */
+    color: #7C8483; /* Secondary color for text */
+    border-left: 5px solid #60B2E5; /* Accent color 2 for a side border */
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .game h2 {
+    color: #982649; /* Primary color for main headings */
+    margin-bottom: 16px;
+  }
+  
+  .game h3 {
+    color: #71A2B6; /* Accent color 1 for subheadings */
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .score, .gameTime, .leaders div {
+    margin-bottom: 12px;
+  }
+  
+  .leaders {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid #60B2E5; /* Accent color 2 for separation */
+    padding-top: 12px;
+  }
+  
+  .leader {
+    text-align: left;
+  }
+  
+  .leader p {
+    margin: 4px 0; /* Tighter paragraph spacing */
+  }
+  
+  .action-button {
+    background-color: #53F4FF; /* Accent color 3 for buttons */
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF; /* White text for contrast */
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .action-button:hover {
+    background-color: #60B2E5; /* Darken on hover using accent color 2 */
+  }
+  

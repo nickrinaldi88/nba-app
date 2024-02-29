@@ -2,7 +2,7 @@
 # Assuming the NBA API Python package is named nba_api
 from nba_api.live.nba.endpoints import scoreboard
 import json
-
+import pprint
 
 def get_games():
     scoreboard_obj = scoreboard.ScoreBoard()
