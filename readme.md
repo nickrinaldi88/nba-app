@@ -14,7 +14,10 @@ Baseline TODO:
 
 
 TODO:
--Fix Flask Error
+-Display Game data in readable format, OR
+
 -Wire up Flask and React
+    -Format in React objects on front end
+-Set up data store
 
 
