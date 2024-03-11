@@ -1,11 +1,21 @@
 
 TODO:
 
+
+
+
+FRONT-END:
+
 -Find image assets
     -Configure Utility to pull assets
 -Configure Dynamic Flexibility in page movement
 
--Ask Data Store questions
+
+BACK-END:
+-
+
+MISC:
+-ASK BELOW QUESTION
 -Figure out initial hosting costs
 -Determine Final .css design
 
