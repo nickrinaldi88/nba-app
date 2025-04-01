@@ -1,6 +1,6 @@
 # NBA Website
 
--This is site I'mc creating to display live NBA game scores. More features are to be added in the future 
+-This is site I'm creating to display live NBA game scores. More features are to be added in the future 
 
 ## Getting Started
 

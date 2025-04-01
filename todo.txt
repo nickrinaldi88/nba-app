@@ -1,17 +1,35 @@
 
 TODO:
 
+
+
+
+FRONT-END:
+
 -Find image assets
     -Configure Utility to pull assets
 -Configure Dynamic Flexibility in page movement
 
--Figure out/Set up data store
+
+BACK-END:
+-
+
+MISC:
+-ASK BELOW QUESTION
 -Figure out initial hosting costs
 -Determine Final .css design
 
-
-
 CONSIDERATIONS:
+- Rate limits
 - CORS configuration for production environment
 - How does React store state? Where? 
     -In Mem, state backend, etc.
+-Other world wide APIs
+
+
+QUESTIONS:
+-I am writing a React App with a Flask backend making API calls every 15-30 seconds, with postgres as an underlying database.
+I don't have a server, so I need to host this app on the cloud, using AWS. how do I even get started doing this, and what components do I need to host on the cloud
+for the bare minimum to get this started? How much would this cost?
+-Can you give me relatevely concise answers in bullet points please?
+-Please list pros and cons for all the options you provide 

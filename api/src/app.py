@@ -41,6 +41,7 @@ def get_games():
             },
         }
         formatted_games.append(game_info)
+        
     return formatted_games
    
 

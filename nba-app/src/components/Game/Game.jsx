@@ -2,11 +2,33 @@
 import React from 'react';
 // In Game.jsx
 import './Game.css';
+import { getTeamSlug } from '../../data/teamNameMap';
 
+function getLogoPath(teamName) {
+  const slug = getTeamSlug(teamName);
+
+  // If no slug found, fallback
+  if (!slug) {
+    return '/assets/default.png';
+  }
+
+  // Otherwise, standard pattern: "<slug>-logo.png"
+  return `/assets/${slug}-logo.png`;
+}
+
+// game object
 function Game({ game }) {
+
+  const homeLogo = getLogoPath(game.homeTeam);
+  const awayLogo = getLogoPath(game.awayTeam);
+
     return (
       <div className="game">
         <h2>{game.homeTeam} vs {game.awayTeam}</h2>
+      <div className="team-logos">
+        <img src={homeLogo} alt={`${game.homeTeam} logo`} />
+        <img src={awayLogo} alt={`${game.awayTeam} logo`} />
+      </div>
         <div className="score">
           <p>{game.homeTeam}: {game.homeTeamScore}</p>
           <p>{game.awayTeam}: {game.awayTeamScore}</p>

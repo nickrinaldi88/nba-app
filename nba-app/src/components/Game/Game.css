@@ -18,8 +18,21 @@
     margin-top: 12px;
     margin-bottom: 8px;
   }
+
+  .team-logos {
+    display: flex;           /* Place logos side by side */
+    justify-content: center; /* Center them horizontally */
+    align-items: center;     /* Vertically center if logos differ in height */
+    gap: 24px;               /* Space between the two logos */
+    margin-bottom: 16px;     /* Some space before the score section */
+  }
+
+  .score {
+    margin-bottom: 12px;
+    text-align: center; 
+  }
   
-  .score, .gameTime, .leaders div {
+  .gameTime, .leaders div {
     margin-bottom: 12px;
   }
   
