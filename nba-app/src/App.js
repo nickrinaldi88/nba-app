@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GamesList from './components/GamesList/GamesList'; // Adjust the path as necessary
+import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import NavBar from './components/NavBar/NavBar'; 
 import logo from './logo.svg';
 import './App.css';
 
@@ -26,23 +28,45 @@ function App() {
 
 
   return (
+    <Router>
+
+    <NavBar />
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Rinaldi Test
+          Hoopmob
         </p>
-        <p>
-        </p>
-        {/* Check if games data is loaded and display GamesList */}
-        {games.length > 0 ? (
-          <GamesList games={games} />
-        ) : (
-          <p>Loading games from Flask...</p>
-        )}
-      
+
+       <Routes>
+        {/* games route */}
+        <Route 
+          path="/"
+          element={
+            <p>Welcome to HoopMob, your one stop shop for all things
+              HOOPS!
+            </p>
+          }
+          />
+        <Route
+          path="/games"
+          element={
+          games.length > 0 
+          ?  <GamesList games={games} />
+          : <p>Loading games from Flask...</p>
+        }
+      />
+        <Route 
+          path="/news"
+          element={
+            <p>A news feed will go here. Maybe top reddit posts?
+            </p>
+          }
+          />
+      </Routes>
       </header>
     </div>
+  </Router>
   );
 }
 
