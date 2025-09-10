@@ -12,7 +12,12 @@ CORS(app)
 def get_games():
     scoreboard_obj = scoreboard.ScoreBoard()
     game_data = json.loads(scoreboard_obj.get_json())  # See the overall structure
-    # List all attributes and methods
+    
+    # display sample data 
+    if not game_data["scoreboard"]["games"]:
+        with open("data/games-sample.json") as f:
+            return jsonify(json.load(f))
+    
     formatted_games = []
     for game in game_data["scoreboard"]["games"]:
 

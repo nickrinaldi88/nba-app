@@ -1,0 +1,24 @@
+[
+  {
+    "gameId": "0022301221",
+    "homeTeam": "Cavaliers",
+    "homeTeamRecord": "48-34",
+    "homeTeamScore": 124,
+    "awayTeam": "Knicks",
+    "awayTeamRecord": "50-32",
+    "awayTeamScore": 105,
+    "gameTimeUTC": "2025-04-02T23:00:00Z",
+    "homeLeaders": {
+      "name": "Donovan Mitchell",
+      "points": 38,
+      "rebounds": 6,
+      "assists": 4
+    },
+    "awayLeaders": {
+      "name": "Jalen Brunson",
+      "points": 30,
+      "rebounds": 5,
+      "assists": 7
+    }
+  }
+]
