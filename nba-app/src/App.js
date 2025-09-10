@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GamesList from './components/GamesList/GamesList'; // Adjust the path as necessary
+import BoxScorePage from './components/BoxScore/BoxScore'; // BoxScorePage
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import NavBar from './components/NavBar/NavBar'; 
 import logo from './logo.svg';
@@ -48,7 +49,7 @@ function App() {
             </p>
           }
           />
-        <Route
+      <Route
           path="/games"
           element={
           games.length > 0 
@@ -56,13 +57,17 @@ function App() {
           : <p>Loading games from Flask...</p>
         }
       />
-        <Route 
+      <Route 
           path="/news"
           element={
             <p>A news feed will go here. Maybe top reddit posts?
             </p>
           }
-          />
+      />
+      <Route
+          path="/game/:gameId"
+          element={<BoxScorePage />}
+      />
       </Routes>
       </header>
     </div>

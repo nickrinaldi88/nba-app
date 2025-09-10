@@ -64,4 +64,10 @@
   .action-button:hover {
     background-color: #60B2E5; /* Darken on hover using accent color 2 */
   }
-  
+ 
+  .game-link {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  max-width: 600px;
+}
