@@ -1,0 +1,75 @@
+{
+  "game": {
+    "gameId": "0022301221",
+    "gameStatusText": "Final",
+    "gameTimeLocal": "2025-04-02T19:00:00",
+    "arena": {
+      "arenaName": "Rocket Mortgage FieldHouse",
+      "arenaCity": "Cleveland",
+      "arenaState": "OH",
+      "arenaCountry": "US"
+    },
+    "homeTeam": {
+      "teamCity": "Cleveland",
+      "teamName": "Cavaliers",
+      "score": 124,
+      "periods": [
+        { "score": 28 },
+        { "score": 25 },
+        { "score": 38 },
+        { "score": 33 }
+          ],
+      "players": [
+        {
+          "personId": "123456",
+          "name": "Donovan Mitchell",
+          "position": "G",
+          "statistics": {
+            "minutesCalculated": "38:12",
+            "points": 38,
+            "reboundsTotal": 6,
+            "assists": 4,
+            "fieldGoalsMade": 14,
+            "fieldGoalsAttempted": 24,
+            "threePointersMade": 5,
+            "threePointersAttempted": 10,
+            "freeThrowsMade": 5,
+            "freeThrowsAttempted": 6,
+            "plusMinusPoints": 12
+          }
+        }
+      ]
+    },
+    "awayTeam": {
+      "teamCity": "New York",
+      "teamName": "Knicks",
+      "score": 105,
+      "periods": [
+        { "score": 34 },
+        { "score": 26 },
+        { "score": 25 },
+        { "score": 20 }
+      ],
+      "players": [
+        {
+          "personId": "654321",
+          "name": "Jalen Brunson",
+          "position": "G",
+          "statistics": {
+            "minutesCalculated": "36:48",
+            "points": 30,
+            "reboundsTotal": 5,
+            "assists": 7,
+            "fieldGoalsMade": 11,
+            "fieldGoalsAttempted": 20,
+            "threePointersMade": 2,
+            "threePointersAttempted": 6,
+            "freeThrowsMade": 6,
+            "freeThrowsAttempted": 7,
+            "plusMinusPoints": -8
+          }
+        }
+      ]
+    }
+  }
+}

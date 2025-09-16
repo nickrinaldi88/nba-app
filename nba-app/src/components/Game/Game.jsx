@@ -1,5 +1,6 @@
 // Game.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 // In Game.jsx
 import './Game.css';
 import { getTeamSlug } from '../../data/teamNameMap';
@@ -23,6 +24,7 @@ function Game({ game }) {
   const awayLogo = getLogoPath(game.awayTeam);
 
     return (
+      <Link to={`/boxscore/${game.gameId}`} className="game-link">
       <div className="game">
         <h2>{game.homeTeam} vs {game.awayTeam}</h2>
       <div className="team-logos">
@@ -39,20 +41,21 @@ function Game({ game }) {
         <div className="leaders">
           <div>
             <h3>Home Leaders</h3>
-            <p>Name: {game.homeLeaders.name}</p>
+            <p>{game.homeLeaders.name}</p>
             <p>Points: {game.homeLeaders.points}</p>
             <p>Rebounds: {game.homeLeaders.rebounds}</p>
             <p>Assists: {game.homeLeaders.assists}</p>
           </div>
           <div>
             <h3>Away Leaders</h3>
-            <p>Name: {game.awayLeaders.name}</p>
+            <p>{game.awayLeaders.name}</p>
             <p>Points: {game.awayLeaders.points}</p>
             <p>Rebounds: {game.awayLeaders.rebounds}</p>
             <p>Assists: {game.awayLeaders.assists}</p>
           </div>
         </div>
       </div>
+      </Link>
     );
   }
   

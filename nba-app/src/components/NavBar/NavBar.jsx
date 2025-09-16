@@ -16,6 +16,9 @@ function NavBar() {
         <li>
           <Link to="/news">News</Link>
         </li>
+        <li>
+          <Link to="/boxscores">BoxScores</Link>
+        </li>
         {/* <li>
           <Link to="/standings">Standings</Link>
         </li>

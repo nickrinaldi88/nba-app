@@ -1,14 +1,16 @@
 from flask import Flask, jsonify
+import os
 from flask_cors import CORS
 # Assuming the NBA API Python package is named nba_api
 from nba_api.live.nba.endpoints import scoreboard
+from nba_api.live.nba.endpoints import boxscore
 import json
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-@app.route('/nba/games', methods=['GET'])
-
+# Games page
+@app.route('/games', methods=['GET'])
 def get_games():
     scoreboard_obj = scoreboard.ScoreBoard()
     game_data = json.loads(scoreboard_obj.get_json())  # See the overall structure
@@ -48,8 +50,26 @@ def get_games():
         formatted_games.append(game_info)
         
     return formatted_games
-   
 
+# Box Score page
+@app.route('/boxscore/<gameId>', methods=['GET'])
+def get_box_score(gameId):
 
+    try:
+        # Try to load live data
+        box_score_obj = boxscore.BoxScore(gameId=gameId)
+        box_score_data = json.loads(box_score_obj.get_json())
+        return jsonify(box_score_data)
+    except Exception as live_err:
+        print(f"Live box score fetch failed: {live_err}")
+        try:
+            # Fallback to test data
+            sample_path = os.path.join(os.path.dirname(__file__), '../data/boxscore-sample.json')
+            with open(sample_path) as f:
+                return jsonify(json.load(f))
+        except Exception as test_err:
+            print(f"Error loading boxscore sample: {test_err}")
+            return jsonify({"error": "Box score data not available"}), 500
+# if to be run as script, run  
 if __name__ == '__main__':
     app.run(debug=True)

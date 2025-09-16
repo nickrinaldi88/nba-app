@@ -1,30 +1,22 @@
-/* NavBar.css */
-
 .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-  }
-  
-  .navbar ul {
-    list-style: none;    /* Remove default bullet points */
-    display: flex;       /* Place items in a row */
-    gap: 2.5rem;           /* Spacing between nav items */
-    margin: 0;           /* Remove default margin */
-    padding: 0;          /* Remove default padding */
-  }
-  
-  .navbar li {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar a {
-    color: #fff;         /* White text */
-    text-decoration: none;  /* Remove underlines */
-  }
-  
-  .navbar a:hover {
-    text-decoration: underline; /* Underline on hover */
-  }
-  
+  position: sticky;
+  top: 0;
+  background-color: #1a1a1a;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  z-index: 1000;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  margin: 0 10px;
+}
+
+.navbar a:hover {
+  color: #1da1f2;
+}
