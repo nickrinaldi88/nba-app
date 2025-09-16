@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import './BoxScore.css';
 // Box score object
-const BoxScorePage = () => {
+const BoxScore = () => {
   const { gameId } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/nba/box_score/${gameId}`)
+    fetch(`http://127.0.0.1:5000/boxscore/${gameId}`)
       .then(res => res.json())
       .then(json => {
         setData(json);
@@ -99,4 +99,5 @@ const PlayerStats = ({ team }) => (
   </div>
 );
 
-export default BoxScorePage;
+export default BoxScore;
+

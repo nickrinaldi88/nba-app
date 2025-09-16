@@ -1,7 +1,6 @@
+/* App.css */
 .App {
   text-align: center;
-  background-color: #FFF; /* Using white for the background for a clean look */
-  color: #7C8483; /* Secondary color for text */
 }
 
 .App-logo {
@@ -16,23 +15,8 @@
 }
 
 .App-header {
-  background-color: #60B2E5; /* Accent color 2 for header background */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white; /* Maintaining white text for contrast */
-}
-
-.App-link {
-  color: #53F4FF; /* Accent color 3 for link color */
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-.App-link:hover {
-  color: #71A2B6; /* Accent color 1 when hovering over the link */
+  padding: 2rem;
+  background-color: transparent;
 }
 
 @keyframes App-logo-spin {

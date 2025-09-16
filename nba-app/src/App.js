@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import GamesList from './components/GamesList/GamesList'; // Adjust the path as necessary
-import BoxScorePage from './components/BoxScore/BoxScore'; // BoxScorePage
+import BoxScore from './components/BoxScore/BoxScore'; // BoxScorePage
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import BoxScorePage from './components/BoxScorePage/BoxScorePage';
 import NavBar from './components/NavBar/NavBar'; 
 import logo from './logo.svg';
 import './App.css';
+import './theme.css';
+
 
 function App() {
 
@@ -15,7 +18,7 @@ function App() {
 
   useEffect(() => {
     // Adjust the URL as necessary to match your Flask API's address and route
-    fetch('http://127.0.0.1:5000/nba/games') // Flask URL
+    fetch('http://127.0.0.1:5000/games') // Flask URL
       .then(response => response.json())
       .then(games => {
         setGames(games);
@@ -64,9 +67,13 @@ function App() {
             </p>
           }
       />
+       <Route
+          path="/boxscore/:gameId"
+          element={<BoxScore />}
+      />
       <Route
-          path="/game/:gameId"
-          element={<BoxScorePage />}
+          path="/boxscores"
+          element={<BoxScore />}
       />
       </Routes>
       </header>

@@ -24,7 +24,7 @@ function Game({ game }) {
   const awayLogo = getLogoPath(game.awayTeam);
 
     return (
-      <Link to={`/game/${game.gameId}`} className="game-link">
+      <Link to={`/boxscore/${game.gameId}`} className="game-link">
       <div className="game">
         <h2>{game.homeTeam} vs {game.awayTeam}</h2>
       <div className="team-logos">
