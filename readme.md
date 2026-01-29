@@ -47,6 +47,7 @@ These instructions will help you locally spin up the react front end and Flask b
 
 6. Start the Flask server:
 
+-cd src
 -python3 app.py
 
 #### Setting up the Frontend (React)

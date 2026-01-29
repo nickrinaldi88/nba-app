@@ -22,6 +22,11 @@ const BoxScore = () => {
 
   if (loading) return <p>Loading box score...</p>;
   if (!data || !data.game) return <p>Box score not available.</p>;
+  if (!data?.game?.homeTeam || !data?.game?.awayTeam) {
+  return <p>Box score not available yet.</p>;
+}
+
+  
 
   const { game } = data;
   const { homeTeam, awayTeam, arena } = game;
