@@ -5,9 +5,15 @@ from flask_cors import CORS
 from nba_api.live.nba.endpoints import scoreboard
 from nba_api.live.nba.endpoints import boxscore
 import json
+from news.reddit import reddit_bp
+from news.twitter import twitter_bp
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
+
+# Register the Reddit blueprint
+app.register_blueprint(reddit_bp, url_prefix='/news')
+app.register_blueprint(twitter_bp, url_prefix='/news')
 
 # Games page
 @app.route('/games', methods=['GET'])
@@ -24,6 +30,8 @@ def get_games():
     for game in game_data["scoreboard"]["games"]:
 
         game_info = {
+
+            "gameId": game["gameId"],
             
             "homeTeam": game["homeTeam"]["teamName"],
             "homeTeamRecord": f'{game["homeTeam"]["wins"]}-{game["homeTeam"]["losses"]}',
@@ -52,21 +60,26 @@ def get_games():
     return formatted_games
 
 # Box Score page
-@app.route('/boxscore/<gameId>', methods=['GET'])
-def get_box_score(gameId):
-
+@app.get("/boxscore/<game_id>")
+def get_box_score(game_id):
     try:
-        # Try to load live data
-        box_score_obj = boxscore.BoxScore(gameId=gameId)
+        # try to load the live data
+        box_score_obj = boxscore.BoxScore(game_id=game_id)
         box_score_data = json.loads(box_score_obj.get_json())
         return jsonify(box_score_data)
+
     except Exception as live_err:
         print(f"Live box score fetch failed: {live_err}")
+
         try:
-            # Fallback to test data
-            sample_path = os.path.join(os.path.dirname(__file__), '../data/boxscore-sample.json')
+            # fall back to sample data
+            sample_path = os.path.join(
+                os.path.dirname(__file__),
+                "../data/boxscore-sample.json"
+            )
             with open(sample_path) as f:
                 return jsonify(json.load(f))
+
         except Exception as test_err:
             print(f"Error loading boxscore sample: {test_err}")
             return jsonify({"error": "Box score data not available"}), 500

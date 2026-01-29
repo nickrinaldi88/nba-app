@@ -6,13 +6,12 @@ TODO:
 
 FRONT-END:
 
--Find image assets
-    -Configure Utility to pull assets
 -Configure Dynamic Flexibility in page movement
 
 
 BACK-END:
--
+-News feed
+-Reddit + twitter API
 
 MISC:
 -ASK BELOW QUESTION

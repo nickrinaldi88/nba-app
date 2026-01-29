@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import GamesList from './components/GamesList/GamesList'; // Adjust the path as necessary
 import BoxScore from './components/BoxScore/BoxScore'; // BoxScorePage
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
-import BoxScorePage from './components/BoxScorePage/BoxScorePage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar'; 
+import NewsFeed from './components/Newsfeed/Newsfeed';
 import logo from './logo.svg';
 import './App.css';
 import './theme.css';
@@ -62,10 +62,7 @@ function App() {
       />
       <Route 
           path="/news"
-          element={
-            <p>A news feed will go here. Maybe top reddit posts?
-            </p>
-          }
+          element={<NewsFeed /> }
       />
        <Route
           path="/boxscore/:gameId"
