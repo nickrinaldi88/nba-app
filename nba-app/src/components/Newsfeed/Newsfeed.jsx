@@ -8,8 +8,8 @@ const NewsFeed = () => {
   useEffect(() => {
     // Fetch Reddit and Twitter posts in parallel
     Promise.all([
-      fetch('http://127.0.0.1:5000/news/').then(res => res.json()),
-      fetch('http://127.0.0.1:5000/news/').then(res => res.json())
+      fetch(`${process.env.REACT_APP_URL}/news/`).then(res => res.json()),
+      fetch(`${process.env.REACT_APP_URL}/news/`).then(res => res.json())
     ])
       .then(([redditPosts, twitterPosts]) => {
         const formattedReddit = redditPosts.map(post => ({

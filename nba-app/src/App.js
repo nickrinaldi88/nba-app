@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     // Adjust the URL as necessary to match your Flask API's address and route
-    fetch('http://127.0.0.1:5000/games') // Flask URL
+    fetch(`${process.env.REACT_APP_URL}/games`) // Flask URL
       .then(response => response.json())
       .then(games => {
         setGames(games);

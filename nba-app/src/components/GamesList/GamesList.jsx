@@ -3,7 +3,6 @@ import React from 'react';
 import Game from '../Game/Game';
 // In GamesList.jsx
 import './GamesList.css';
-import { Link } from 'react-router';
 
 
 function GamesList({ games }) {
