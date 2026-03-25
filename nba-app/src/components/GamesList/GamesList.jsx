@@ -8,8 +8,8 @@ import './GamesList.css';
 function GamesList({ games }) {
   return (
     <div className="gamesList">
-      {games.map((game, index) => (
-        <Game key={index} game={game} />
+      {games.map((game) => (
+        <Game key={game.gameId} game={game} />
       ))}
     </div>
   );

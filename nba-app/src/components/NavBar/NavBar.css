@@ -1,22 +1,52 @@
 .navbar {
   position: sticky;
   top: 0;
-  background-color: #1a1a1a;
-  padding: 1rem 2rem;
+  height: 60px;
+  background-color: #111;
+  padding: 0 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #333;
+  justify-content: space-between;
+  border-bottom: 1px solid #222;
   z-index: 1000;
 }
 
-.navbar a {
+.navbar-brand {
   text-decoration: none;
-  color: #ffffff;
-  font-weight: 600;
-  margin: 0 10px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #fff;
 }
 
-.navbar a:hover {
-  color: #1da1f2;
+.navbar-brand:hover {
+  color: #3b82f6;
+}
+
+.navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #aaa;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.navbar-links a:hover {
+  color: #fff;
+  background: #1e1e1e;
+}
+
+.navbar-links a.active {
+  color: #fff;
+  background: #1e1e1e;
 }

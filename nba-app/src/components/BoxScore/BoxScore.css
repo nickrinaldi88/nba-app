@@ -123,6 +123,34 @@
   padding: 0 1rem;
 }
 
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.skeleton {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #1e1e1e 25%, #2a2a2a 50%, #1e1e1e 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.skeleton-back-link  { width: 100px; height: 14px; margin-bottom: 1.2rem; }
+.skeleton-title      { width: 55%; height: 28px; margin-bottom: 0.6rem; }
+.skeleton-subtitle   { width: 35%; height: 16px; margin-bottom: 1.75rem; }
+.skeleton-team-card  { flex: 1 1 360px; height: 140px; border-radius: 10px; }
+.skeleton-section-title { width: 160px; height: 20px; margin-bottom: 0.75rem; }
+
+.skeleton-table {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-row { height: 36px; width: 100%; border-radius: 4px; }
+
 @media (max-width: 640px) {
   .boxscore-container {
     padding: 1rem 0.7rem 2rem;

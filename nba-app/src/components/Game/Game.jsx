@@ -1,63 +1,68 @@
-// Game.jsx
-import React from 'react';
 import { Link } from 'react-router-dom';
-// In Game.jsx
 import './Game.css';
 import { getTeamSlug } from '../../data/teamNameMap';
 
 function getLogoPath(teamName) {
   const slug = getTeamSlug(teamName);
-
-  // If no slug found, fallback
-  if (!slug) {
-    return '/assets/default.png';
-  }
-
-  // Otherwise, standard pattern: "<slug>-logo.png"
+  if (!slug) return '/assets/default.png';
   return `/assets/${slug}-logo.png`;
 }
 
-// game object
-function Game({ game }) {
+function StatusBadge({ status, statusText, gameTimeUTC }) {
+  if (status === 2) {
+    return <span className="status-badge status-badge--live">LIVE · {statusText}</span>;
+  }
+  if (status === 3) {
+    return <span className="status-badge status-badge--final">Final</span>;
+  }
+  // Upcoming — show local tipoff time
+  const time = new Date(gameTimeUTC).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  return <span className="status-badge status-badge--upcoming">{time}</span>;
+}
 
+function Game({ game }) {
   const homeLogo = getLogoPath(game.homeTeam);
   const awayLogo = getLogoPath(game.awayTeam);
 
-    return (
-      <Link to={`/boxscore/${game.gameId}`} className="game-link">
+  return (
+    <Link to={`/boxscore/${game.gameId}`} className="game-link">
       <div className="game">
-        <h2>{game.homeTeam} vs {game.awayTeam}</h2>
-      <div className="team-logos">
-        <img src={homeLogo} alt={`${game.homeTeam} logo`} />
-        <img src={awayLogo} alt={`${game.awayTeam} logo`} />
-      </div>
-        <div className="score">
-          <p>{game.homeTeam}: {game.homeTeamScore}</p>
-          <p>{game.awayTeam}: {game.awayTeamScore}</p>
-        </div>
-        <div className="gameTime">
-          <p>Game Time: {new Date(game.gameTimeUTC).toLocaleString()}</p>
-        </div>
-        <div className="leaders">
-          <div>
-            <h3>Home Leaders</h3>
-            <p>{game.homeLeaders.name}</p>
-            <p>Points: {game.homeLeaders.points}</p>
-            <p>Rebounds: {game.homeLeaders.rebounds}</p>
-            <p>Assists: {game.homeLeaders.assists}</p>
+
+        <div className="game-matchup">
+          <div className="game-team">
+            <img src={awayLogo} alt={`${game.awayTeam} logo`} />
+            <span className="team-name">{game.awayTeam}</span>
+            <span className="team-record">{game.awayTeamRecord}</span>
           </div>
-          <div>
-            <h3>Away Leaders</h3>
-            <p>{game.awayLeaders.name}</p>
-            <p>Points: {game.awayLeaders.points}</p>
-            <p>Rebounds: {game.awayLeaders.rebounds}</p>
-            <p>Assists: {game.awayLeaders.assists}</p>
+
+          <div className="game-center">
+            <div className="game-score">
+              <span>{game.awayTeamScore}</span>
+              <span className="score-divider">—</span>
+              <span>{game.homeTeamScore}</span>
+            </div>
+            <StatusBadge
+              status={game.gameStatus}
+              statusText={game.gameStatusText}
+              gameTimeUTC={game.gameTimeUTC}
+            />
+          </div>
+
+          <div className="game-team game-team--home">
+            <img src={homeLogo} alt={`${game.homeTeam} logo`} />
+            <span className="team-name">{game.homeTeam}</span>
+            <span className="team-record">{game.homeTeamRecord}</span>
           </div>
         </div>
+
+        <div className="game-leaders">
+          <span>{game.awayLeaders.name} · {game.awayLeaders.points}/{game.awayLeaders.rebounds}/{game.awayLeaders.assists}</span>
+          <span>{game.homeLeaders.name} · {game.homeLeaders.points}/{game.homeLeaders.rebounds}/{game.homeLeaders.assists}</span>
+        </div>
+
       </div>
-      </Link>
-    );
-  }
-  
+    </Link>
+  );
+}
 
 export default Game;

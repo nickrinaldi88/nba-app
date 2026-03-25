@@ -1,2 +1,4 @@
 nba-app/node_modules
 api/venv
+api/.env
+nba-app/.env

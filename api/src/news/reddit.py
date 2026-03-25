@@ -5,15 +5,10 @@ import os
 
 reddit_bp = Blueprint("reddit", __name__)
 
-# variables
-
-client_id = "l85_6mmbcp-GBnjAUjdwUg"
-secret = "hkYSbjmZoVJG0iH7xEa_k2n7lGsPCA"
-
 # Initialize PRAW Reddit client
 reddit = praw.Reddit(
-    client_id=client_id,
-    client_secret=secret, # store in variable
+    client_id=os.environ["REDDIT_CLIENT_ID"],
+    client_secret=os.environ["REDDIT_CLIENT_SECRET"],
     user_agent="Hoopmob/1.0 by u/SnooCats1084"
 )
 

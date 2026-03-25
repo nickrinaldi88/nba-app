@@ -1,5 +1,7 @@
 from flask import Flask, jsonify
 import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '../.env'))
 from flask_cors import CORS
 # Assuming the NBA API Python package is named nba_api
 from nba_api.live.nba.endpoints import scoreboard
@@ -15,7 +17,7 @@ CORS(app, supports_credentials=True)
 # Extra safety: ensure CORS headers are always present.
 @app.after_request
 def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "http://localhost:3000"
+    response.headers["Access-Control-Allow-Origin"] = os.getenv("CORS_ORIGIN", "http://localhost:3000")
     response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
     return response
@@ -49,7 +51,7 @@ def get_games():
         game_info = {
 
             "gameId": game["gameId"],
-            
+
             "homeTeam": game["homeTeam"]["teamName"],
             "homeTeamRecord": f'{game["homeTeam"]["wins"]}-{game["homeTeam"]["losses"]}',
             "homeTeamScore": game["homeTeam"]["score"],
@@ -57,6 +59,8 @@ def get_games():
             "awayTeamRecord": f'{game["awayTeam"]["wins"]}-{game["awayTeam"]["losses"]}',
             "awayTeamScore": game["awayTeam"]["score"],
             "gameTimeUTC": game["gameTimeUTC"],
+            "gameStatus": game.get("gameStatus"),
+            "gameStatusText": game.get("gameStatusText", ""),
 
             "homeLeaders": {
                 "name": game["gameLeaders"]["homeLeaders"]["name"],
@@ -80,26 +84,16 @@ def get_games():
 @app.get("/boxscore/<game_id>")
 def get_box_score(game_id):
     try:
-        # try to load the live data
         box_score_obj = boxscore.BoxScore(game_id=game_id)
-        box_score_data = json.loads(box_score_obj.get_json())
+        raw = box_score_obj.get_json()
+        if not raw or not raw.strip():
+            return jsonify({"error": "Box score not available yet. The game may not have started."}), 404
+        box_score_data = json.loads(raw)
         return jsonify(box_score_data)
 
     except Exception as live_err:
         print(f"Live box score fetch failed: {live_err}")
-
-        try:
-            # fall back to sample data
-            sample_path = os.path.join(
-                os.path.dirname(__file__),
-                "../data/boxscore-sample.json"
-            )
-            with open(sample_path) as f:
-                return jsonify(json.load(f))
-
-        except Exception as test_err:
-            print(f"Error loading boxscore sample: {test_err}")
-            return jsonify({"error": "Box score data not available"}), 500
+        return jsonify({"error": "Box score not available yet. The game may not have started."}), 404
 # if to be run as script, run  
 if __name__ == '__main__':
     port = int(os.getenv("PORT", "5001"))

@@ -8,6 +8,8 @@
     "awayTeamRecord": "50-32",
     "awayTeamScore": 105,
     "gameTimeUTC": "2025-04-02T23:00:00Z",
+    "gameStatus": 3,
+    "gameStatusText": "Final",
     "homeLeaders": {
       "name": "Donovan Mitchell",
       "points": 38,

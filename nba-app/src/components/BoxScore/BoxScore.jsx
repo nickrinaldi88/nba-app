@@ -106,7 +106,7 @@ const BoxScore = () => {
   const homeTotals = aggregateTeamStats(homeTeam?.players || []);
 
   if (loading) {
-    return <p className="boxscore-message">Loading box score...</p>;
+    return <BoxScoreSkeleton />;
   }
 
   if (error) {
@@ -220,5 +220,32 @@ const PlayerStats = ({ team }) => {
     </section>
   );
 };
+
+const BoxScoreSkeleton = () => (
+  <section className="boxscore-container">
+    <div className="skeleton skeleton-back-link" />
+    <div className="skeleton skeleton-title" />
+    <div className="skeleton skeleton-subtitle" />
+
+    <div className="boxscore-summary">
+      <div className="skeleton skeleton-team-card" />
+      <div className="skeleton skeleton-team-card" />
+    </div>
+
+    <div className="skeleton skeleton-section-title" />
+    <div className="skeleton-table">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div key={i} className="skeleton skeleton-row" />
+      ))}
+    </div>
+
+    <div className="skeleton skeleton-section-title" style={{ marginTop: '2rem' }} />
+    <div className="skeleton-table">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div key={i} className="skeleton skeleton-row" />
+      ))}
+    </div>
+  </section>
+);
 
 export default BoxScore;
