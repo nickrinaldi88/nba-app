@@ -1,39 +1,93 @@
 .news-feed {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  max-width: 780px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
 }
 
-.news-feed h2 {
-  margin-bottom: 1rem;
-  color: #095979;
-  font-size: 1.5rem;
-  text-align: left;
+.news-heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1.25rem;
+}
+
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .news-item {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+  border-bottom: 1px solid #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.news-item a {
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-source {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.news-source--reddit {
+  background-color: rgba(255, 69, 0, 0.15);
+  color: #ff6314;
+  border: 1px solid rgba(255, 69, 0, 0.3);
+}
+
+.news-title {
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #333;
-  font-size: 1.05rem;
+  color: #e5e5e5;
   text-decoration: none;
+  line-height: 1.45;
 }
 
-.news-item a:hover {
-  color: #095979;
+.news-title:hover {
+  color: #fff;
   text-decoration: underline;
 }
 
-.meta {
-  font-size: 0.85rem;
+.news-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.78rem;
   color: #666;
-  margin-top: 0.25rem;
 }
+
+.news-message {
+  text-align: center;
+  color: #888;
+  margin-top: 3rem;
+}
+
+/* Skeleton shimmer — reuses same keyframes as BoxScore */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+.skeleton {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.skeleton-news-heading { width: 180px; height: 22px; margin-bottom: 1.25rem; }
+.skeleton-news-badge   { width: 60px;  height: 18px; border-radius: 999px; }
+.skeleton-news-title   { width: 85%;   height: 16px; }
+.skeleton-news-meta    { width: 100px; height: 13px; }

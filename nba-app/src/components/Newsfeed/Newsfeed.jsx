@@ -1,69 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Newsfeed.css';
+
+function formatCount(n) {
+  if (!n && n !== 0) return '—';
+  if (n >= 1000) return `${(n / 1000).toFixed(1)}k`;
+  return n;
+}
 
 const NewsFeed = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    // Fetch Reddit and Twitter posts in parallel
-    Promise.all([
-      fetch('http://127.0.0.1:5000/news/').then(res => res.json()),
-      fetch('http://127.0.0.1:5000/news/').then(res => res.json())
-    ])
-      .then(([redditPosts, twitterPosts]) => {
-        const formattedReddit = redditPosts.map(post => ({
-          type: 'Reddit',
-          title: post.title,
-          url: post.url,
-          upvotes: post.upvotes,
-          comments: post.comments,
-          date: new Date().toISOString() // Fake timestamp for now
-        }));
-
-        const formattedTwitter = twitterPosts.map(tweet => ({
-          type: 'Twitter',
-          title: tweet.content,
-          url: tweet.url,
-          upvotes: tweet.likes,
-          comments: tweet.retweets,
-          date: tweet.date
-        }));
-
-        const combined = [...formattedReddit, ...formattedTwitter];
-
-        // Optional: Sort by upvotes or date
-        combined.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        setPosts(combined);
+    fetch(`${process.env.REACT_APP_URL}/news/`)
+      .then(res => {
+        if (!res.ok) throw new Error(`API returned ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        setPosts(data);
         setLoading(false);
       })
       .catch(err => {
         console.error('Error fetching news:', err);
+        setError('Could not load news right now.');
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <p>Loading news...</p>;
-  if (!posts.length) return <p>No news found.</p>;
+  if (loading) return <NewsFeedSkeleton />;
+  if (error)   return <p className="news-message">{error}</p>;
+  if (!posts.length) return <p className="news-message">No posts found.</p>;
 
   return (
     <div className="news-feed">
-      <h2>📰 Latest NBA News</h2>
-      <ul>
+      <h2 className="news-heading">Latest NBA News</h2>
+      <ul className="news-list">
         {posts.map((post, i) => (
           <li key={i} className="news-item">
-            <a href={post.url} target="_blank" rel="noreferrer">
+            <span className="news-source news-source--reddit">Reddit</span>
+            <a href={post.url} target="_blank" rel="noreferrer" className="news-title">
               {post.title}
             </a>
-            <p className="meta">
-              {post.type === 'Reddit' ? '📕 Reddit' : '🐦 Twitter'} • 🔺 {post.upvotes} • 💬 {post.comments}
-            </p>
+            <div className="news-meta">
+              <span>▲ {formatCount(post.upvotes)}</span>
+              <span>💬 {formatCount(post.comments)}</span>
+            </div>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
+const NewsFeedSkeleton = () => (
+  <div className="news-feed">
+    <div className="skeleton skeleton-news-heading" />
+    <ul className="news-list">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <li key={i} className="news-item">
+          <div className="skeleton skeleton-news-badge" />
+          <div className="skeleton skeleton-news-title" />
+          <div className="skeleton skeleton-news-meta" />
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 export default NewsFeed;

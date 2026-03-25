@@ -1,5 +1,7 @@
 from flask import Flask, jsonify
 import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '../.env'))
 from flask_cors import CORS
 # Assuming the NBA API Python package is named nba_api
 from nba_api.live.nba.endpoints import scoreboard
@@ -9,7 +11,16 @@ from news.reddit import reddit_bp
 from news.twitter import twitter_bp
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+# Allow local dev origins and attach headers to error responses too.
+CORS(app, supports_credentials=True)
+
+# Extra safety: ensure CORS headers are always present.
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = os.getenv("CORS_ORIGIN", "http://localhost:3000")
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+    return response
 
 # Register the Reddit blueprint
 app.register_blueprint(reddit_bp, url_prefix='/news')
@@ -18,12 +29,20 @@ app.register_blueprint(twitter_bp, url_prefix='/news')
 # Games page
 @app.route('/games', methods=['GET'])
 def get_games():
-    scoreboard_obj = scoreboard.ScoreBoard()
-    game_data = json.loads(scoreboard_obj.get_json())  # See the overall structure
+    try:
+        scoreboard_obj = scoreboard.ScoreBoard()
+        game_data = json.loads(scoreboard_obj.get_json())  # See the overall structure
+    except Exception as err:
+        print(f"Live scoreboard fetch failed: {err}")
+        game_data = None
     
     # display sample data 
-    if not game_data["scoreboard"]["games"]:
-        with open("data/games-sample.json") as f:
+    if not game_data or not game_data.get("scoreboard", {}).get("games"):
+        sample_path = os.path.join(
+            os.path.dirname(__file__),
+            "../data/games-sample.json"
+        )
+        with open(sample_path) as f:
             return jsonify(json.load(f))
     
     formatted_games = []
@@ -32,7 +51,7 @@ def get_games():
         game_info = {
 
             "gameId": game["gameId"],
-            
+
             "homeTeam": game["homeTeam"]["teamName"],
             "homeTeamRecord": f'{game["homeTeam"]["wins"]}-{game["homeTeam"]["losses"]}',
             "homeTeamScore": game["homeTeam"]["score"],
@@ -40,6 +59,8 @@ def get_games():
             "awayTeamRecord": f'{game["awayTeam"]["wins"]}-{game["awayTeam"]["losses"]}',
             "awayTeamScore": game["awayTeam"]["score"],
             "gameTimeUTC": game["gameTimeUTC"],
+            "gameStatus": game.get("gameStatus"),
+            "gameStatusText": game.get("gameStatusText", ""),
 
             "homeLeaders": {
                 "name": game["gameLeaders"]["homeLeaders"]["name"],
@@ -57,32 +78,23 @@ def get_games():
         }
         formatted_games.append(game_info)
         
-    return formatted_games
+    return jsonify(formatted_games)
 
 # Box Score page
 @app.get("/boxscore/<game_id>")
 def get_box_score(game_id):
     try:
-        # try to load the live data
         box_score_obj = boxscore.BoxScore(game_id=game_id)
-        box_score_data = json.loads(box_score_obj.get_json())
+        raw = box_score_obj.get_json()
+        if not raw or not raw.strip():
+            return jsonify({"error": "Box score not available yet. The game may not have started."}), 404
+        box_score_data = json.loads(raw)
         return jsonify(box_score_data)
 
     except Exception as live_err:
         print(f"Live box score fetch failed: {live_err}")
-
-        try:
-            # fall back to sample data
-            sample_path = os.path.join(
-                os.path.dirname(__file__),
-                "../data/boxscore-sample.json"
-            )
-            with open(sample_path) as f:
-                return jsonify(json.load(f))
-
-        except Exception as test_err:
-            print(f"Error loading boxscore sample: {test_err}")
-            return jsonify({"error": "Box score data not available"}), 500
+        return jsonify({"error": "Box score not available yet. The game may not have started."}), 404
 # if to be run as script, run  
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv("PORT", "5001"))
+    app.run(debug=True, host="127.0.0.1", port=port)
