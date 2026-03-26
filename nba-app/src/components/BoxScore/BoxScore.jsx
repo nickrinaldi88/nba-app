@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { getTeamSlug } from '../../data/teamNameMap';
 import './BoxScore.css';
+
+function getLogoPath(teamName) {
+  const slug = getTeamSlug(teamName);
+  if (!slug) return null;
+  return `/assets/${slug}-logo.png`;
+}
 
 const LIVE_POLL_INTERVAL_MS = 30000;
 
@@ -126,12 +133,26 @@ const BoxScore = () => {
     <section className="boxscore-container">
       <div className="boxscore-header">
         <Link to="/games" className="boxscore-back-link">Back to Games</Link>
-        <h1>
-          {awayTeam.teamCity} {awayTeam.teamName} @ {homeTeam.teamCity} {homeTeam.teamName}
-        </h1>
-        <p className="boxscore-status">{game.gameStatusText} | {localTipoff}</p>
+        <div className="boxscore-matchup">
+          <div className="boxscore-team">
+            {getLogoPath(awayTeam.teamName) && (
+              <img src={getLogoPath(awayTeam.teamName)} alt={awayTeam.teamName} className="boxscore-logo" />
+            )}
+            <span>{awayTeam.teamCity} {awayTeam.teamName}</span>
+          </div>
+          <div className="boxscore-matchup-center">
+            <span className="boxscore-matchup-score">{awayTeam.score} — {homeTeam.score}</span>
+            <span className="boxscore-status">{game.gameStatusText}</span>
+          </div>
+          <div className="boxscore-team boxscore-team--home">
+            {getLogoPath(homeTeam.teamName) && (
+              <img src={getLogoPath(homeTeam.teamName)} alt={homeTeam.teamName} className="boxscore-logo" />
+            )}
+            <span>{homeTeam.teamCity} {homeTeam.teamName}</span>
+          </div>
+        </div>
         <p className="boxscore-arena">
-          {arena?.arenaName}, {arena?.arenaCity}, {arena?.arenaState}
+          {arena?.arenaName}, {arena?.arenaCity}, {arena?.arenaState} · {localTipoff}
         </p>
       </div>
 
@@ -149,7 +170,12 @@ const BoxScore = () => {
 
 const TeamSummary = ({ team, title, totals }) => (
   <article className="team-summary">
-    <h3>{title}: {team.teamCity} {team.teamName}</h3>
+    <div className="team-summary-header">
+      {getLogoPath(team.teamName) && (
+        <img src={getLogoPath(team.teamName)} alt={team.teamName} className="team-summary-logo" />
+      )}
+      <h3>{team.teamCity} {team.teamName} <span className="team-summary-label">{title}</span></h3>
+    </div>
     <p className="team-score">Score: {team.score ?? '-'}</p>
     <p className="team-periods">
       {(team.periods || []).map((period, i) => `Q${i + 1}: ${period.score ?? 0}`).join(' | ')}

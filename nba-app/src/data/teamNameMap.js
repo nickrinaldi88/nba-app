@@ -24,7 +24,7 @@ const teamNameMap = {
     Warriors: 'golden-state-warriors',
     Rockets: 'houston-rockets',
     Pacers: 'indiana-pacers',
-    Clippers: 'los-angeles-clippers', // note: file is "los-angeles-clippers.png" (missing -logo)
+    Clippers: 'los-angeles-clippers',
     Lakers: 'los-angeles-lakers',
     Grizzlies: 'memphis-grizzlies',
     Heat: 'miami-heat',

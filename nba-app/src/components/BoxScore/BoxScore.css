@@ -9,14 +9,81 @@
   margin-bottom: 1.75rem;
 }
 
-.boxscore-header h1 {
-  margin: 0.5rem 0;
+/* Matchup row */
+.boxscore-matchup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0 0.5rem;
+  gap: 1rem;
+}
+
+.boxscore-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.boxscore-team--home {
+  align-items: center;
+}
+
+.boxscore-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.boxscore-matchup-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.boxscore-matchup-score {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
 .boxscore-status {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+/* Team summary card header */
+.team-summary-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.team-summary-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.team-summary-header h3 {
   margin: 0;
-  color: #d8d8d8;
-  font-weight: 600;
+}
+
+.team-summary-label {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 400;
+  margin-left: 0.3rem;
 }
 
 .boxscore-arena {
