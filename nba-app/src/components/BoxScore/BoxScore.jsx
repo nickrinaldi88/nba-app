@@ -11,6 +11,16 @@ function getLogoPath(teamName) {
 
 const LIVE_POLL_INTERVAL_MS = 30000;
 
+// Converts "PT10M30.00S" or "PT10M" → "10:30"
+function formatMinutes(raw) {
+  if (!raw) return '0:00';
+  const match = raw.match(/PT(\d+)M(?:(\d+)(?:\.\d+)?S)?/);
+  if (!match) return raw; // already formatted or unexpected shape
+  const mins = match[1];
+  const secs = String(match[2] || 0).padStart(2, '0');
+  return `${mins}:${secs}`;
+}
+
 function toNumber(value) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : 0;
@@ -229,7 +239,7 @@ const PlayerStats = ({ team }) => {
                 <tr key={player.personId}>
                   <td>{player.name || '-'}</td>
                   <td>{player.position || '-'}</td>
-                  <td>{stats.minutesCalculated || '0:00'}</td>
+                  <td>{formatMinutes(stats.minutesCalculated)}</td>
                   <td>{stats.points ?? 0}</td>
                   <td>{stats.reboundsTotal ?? 0}</td>
                   <td>{stats.assists ?? 0}</td>

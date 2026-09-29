@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: hoopmob-api
+    runtime: python
+    plan: starter
+    rootDir: api
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd src && gunicorn -w 2 -b 0.0.0.0:$PORT app:app
+    healthCheckPath: /health
+    disk:
+      name: blog-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      # Pin a supported runtime instead of inheriting Render's changing default.
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: BLOG_DB_PATH
+        value: /data/blog.db
+      - key: BLOG_PASSWORD
+        sync: false
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+      - key: REDDIT_CLIENT_ID
+        sync: false
+      - key: REDDIT_CLIENT_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        value: https://hoopmob-frontend.onrender.com
+
+  - type: web
+    name: hoopmob-frontend
+    runtime: static
+    rootDir: nba-app
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      - key: REACT_APP_URL
+        value: https://hoopmob-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

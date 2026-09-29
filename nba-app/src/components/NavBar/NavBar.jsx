@@ -8,6 +8,7 @@ function NavBar() {
       <ul className="navbar-links">
         <li><NavLink to="/games" className={({ isActive }) => isActive ? 'active' : ''}>Games</NavLink></li>
         <li><NavLink to="/news"  className={({ isActive }) => isActive ? 'active' : ''}>News</NavLink></li>
+        <li><NavLink to="/blog"  className={({ isActive }) => isActive ? 'active' : ''}>Blog</NavLink></li>
       </ul>
     </nav>
   );

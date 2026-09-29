@@ -1,4 +1,8 @@
 nba-app/node_modules
 api/venv
+api/.venv
 api/.env
 nba-app/.env
+api/data/blog.db
+__pycache__/
+*.pyc

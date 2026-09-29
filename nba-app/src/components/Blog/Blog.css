@@ -1,0 +1,233 @@
+/* ── shared ── */
+.blog-message {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  color: #aaa;
+}
+
+.blog-back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #9fd0ff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.blog-back-link:hover { text-decoration: underline; }
+
+/* ── list page ── */
+.blog-list-container {
+  max-width: 800px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+}
+
+.blog-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.blog-list-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.blog-write-btn {
+  background: #e8363d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.blog-write-btn:hover { background: #c62d33; }
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blog-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.15s ease;
+}
+
+.blog-card:hover { border-color: #444; }
+
+.blog-card-title {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.blog-card-title:hover { color: #9fd0ff; }
+
+.blog-card-preview {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+.blog-card-date {
+  font-size: 0.78rem;
+  color: #555;
+}
+
+/* ── single post ── */
+.blog-post-container {
+  max-width: 760px;
+  margin: 2.5rem auto;
+  padding: 0 1rem 4rem;
+}
+
+.blog-post-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
+}
+
+.blog-post-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 2rem;
+}
+
+.blog-post-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #ddd;
+}
+
+.blog-post-body h1,
+.blog-post-body h2,
+.blog-post-body h3 {
+  color: #fff;
+  margin-top: 2rem;
+}
+
+.blog-post-body p  { margin: 0 0 1rem; }
+.blog-post-body ul,
+.blog-post-body ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+.blog-post-body a  { color: #9fd0ff; }
+
+.blog-delete-btn {
+  margin-top: 3rem;
+  background: none;
+  border: 1px solid #444;
+  color: #666;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.blog-delete-btn:hover {
+  border-color: #e8363d;
+  color: #e8363d;
+}
+
+/* ── admin / write ── */
+.blog-admin-container {
+  max-width: 760px;
+  margin: 2.5rem auto;
+  padding: 0 1rem 4rem;
+}
+
+.blog-admin-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0 0 1.75rem;
+}
+
+.blog-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.75rem;
+}
+
+.blog-label-hint {
+  font-weight: 400;
+  text-transform: none;
+  color: #555;
+  letter-spacing: 0;
+}
+
+.blog-input,
+.blog-textarea {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.blog-input:focus,
+.blog-textarea:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.blog-textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.blog-error {
+  color: #e8363d;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0;
+}
+
+.blog-submit-btn {
+  margin-top: 1rem;
+  background: #e8363d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  align-self: flex-start;
+}
+
+.blog-submit-btn:hover:not(:disabled) { background: #c62d33; }
+.blog-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }

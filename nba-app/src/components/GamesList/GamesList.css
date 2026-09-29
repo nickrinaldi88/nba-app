@@ -7,6 +7,24 @@
   margin: 0 auto;
 }
 
+.games-empty {
+  max-width: 42rem;
+  margin: 4rem auto;
+  padding: 1.5rem;
+  text-align: center;
+  color: #d1d5db;
+}
+
+.games-empty h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.games-empty p {
+  margin: 0;
+  color: #9ca3af;
+}
+
 @media (max-width: 900px) {
   .gamesList {
     grid-template-columns: repeat(2, 1fr);

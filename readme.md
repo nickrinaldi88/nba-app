@@ -1,66 +1,77 @@
-# NBA Website
+# Hoopmob
 
--This is site I'm creating to display live NBA game scores. More features are to be added in the future 
+An NBA scoreboard with live game cards, box scores, NBA community news, and a blog.
 
-## Getting Started
+## Run it locally
 
-These instructions will help you locally spin up the react front end and Flask backend API 
+You need Node.js 20+ and Python 3.10+ installed. Open two terminal windows from the repository root.
 
-### Prerequisites
+### Terminal 1 — API
 
-- Node.js and npm (https://nodejs.org/)
-- Python 3.x (https://www.python.org/downloads/)
-- Flask (pip install Flask)
+Run these once to create local configuration and install Python packages:
 
-### Installing
+```bash
+[ -f api/.env ] || cp api/.env.example api/.env
+make api-setup
+```
 
-- Follow these steps to set up the backend API, then the front end react UI. When you run each resource the commands should provide you the localhost link to see the pages, usually configured on ports 3000 and 5000 respectively
+To preview a game card any day of the year, open `api/.env` and set:
 
-#### Setting up the Backend (Flask)
+```env
+USE_SAMPLE_DATA=true
+```
 
-1. Clone the repository to your local machine:
+Then start the API:
 
-- ```git clone https://github.com/nickrinaldi88/nba-app.git```
+```bash
+make api
+```
 
-2. Navigate to the Flask app directory:
+Leave this terminal running. A successful start means the API is available at `http://localhost:5001` and `http://localhost:5001/health` returns `{"status":"ok"}`.
 
-- ```cd api```
+### Terminal 2 — website
 
-3. Create a virtual environment:
+Run these once to create local configuration and install JavaScript packages:
 
-- ```python3 -m venv venv```
+```bash
+[ -f nba-app/.env ] || cp nba-app/.env.example nba-app/.env
+make frontend-setup
+```
 
-4. Activate the virtual environment:
+Then start the site:
 
-- On Windows:
-  ```
-  venv\Scripts\activate
-  ```
-- On macOS and Linux:
-  ```
-  source venv/bin/activate
-  ```
+```bash
+make frontend
+```
 
-5. Install the required Python packages:
+Your browser should open automatically. If it does not, visit [http://localhost:3000](http://localhost:3000).
 
--pip install -r requirements.txt
+### What works without extra setup
 
-6. Start the Flask server:
+- Games and box-score demo: set `USE_SAMPLE_DATA=true` as above.
+- Live games: leave `USE_SAMPLE_DATA=false`. On an NBA off-day, the site correctly says there are no games.
+- News: add valid Reddit credentials to `api/.env` to enable it. Without them, only the news page is unavailable.
+- Blog publishing: set a local `BLOG_PASSWORD` in `api/.env`. Never put a production password in a committed file.
 
--cd src
--python3 app.py
+## Checks before a deploy
 
-#### Setting up the Frontend (React)
+```bash
+make api-test
+make frontend-test
+make frontend-build
+```
 
-1. Navigate to the React app directory:
+GitHub Actions runs these checks automatically on pushes and pull requests.
 
-- ```cd nba-app```
+## Environment variables
 
-2. Install the required npm packages:
+Copy the included `.env.example` files; keep the generated `.env` files private.
 
-- ```npm start```
-
+- `REACT_APP_URL`: backend URL used by the frontend; locally, `http://localhost:5001`.
+- `CORS_ORIGIN`: allowed frontend origin; locally, `http://localhost:3000`.
+- `USE_SAMPLE_DATA`: local demonstration mode only. Keep `false` in production.
+- `BLOG_PASSWORD`, `FLASK_SECRET_KEY`, `REDDIT_CLIENT_ID`, and `REDDIT_CLIENT_SECRET`: private deployment secrets.
 
 ## Contributing
 
-- email ```rinaldinick88@gmail.com``` if interested in partnering or contributing
+Email `rinaldinick88@gmail.com` if you are interested in contributing.

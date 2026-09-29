@@ -4,6 +4,9 @@ import BoxScore from './components/BoxScore/BoxScore';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import NewsFeed from './components/Newsfeed/Newsfeed';
+import BlogList from './components/Blog/BlogList';
+import BlogPost from './components/Blog/BlogPost';
+import BlogAdmin from './components/Blog/BlogAdmin';
 import './App.css';
 import './theme.css';
 
@@ -57,6 +60,9 @@ function App() {
             }
           />
           <Route path="/news" element={<NewsFeed />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/new" element={<BlogAdmin />} />
+          <Route path="/blog/:postId" element={<BlogPost />} />
           <Route path="/boxscore/:gameId" element={<BoxScore />} />
         </Routes>
       </div>
